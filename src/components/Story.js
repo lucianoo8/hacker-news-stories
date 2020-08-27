@@ -1,11 +1,26 @@
-import React,{useEffect,useState} from 'react';
-import { getStory,getStoryIds } from '../services/theapi';
+import React, {useEffect,useState} from 'react';
+import { getStory} from '../services/theapi';
 
-export const  Story = ()  => {
-
-   // const [storyIds, setStoryIds] = useState([]);
+export const  Story = ({ storyId })  => {
+ const [story, setStory] = useState({});
     
-   return <p>OK Its a new Story</p>;
+ useEffect(() => {
+    getStory(storyId).then(data => data && data.url && setStory(data));
+
+}, []);
+  
+   return story && story.url ?  (
+      <>
+      
+       <a href = {story.url}>
+           <p>{story.title}</p>
+       </a>
+
+       By: <p>{story.by}</p>
+       Posted: <p>{story.time}</p>
+
+      </>
+       ): null;
 };
 
 
