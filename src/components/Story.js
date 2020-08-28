@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import { getStory} from '../services/theapi';
-
+import {StoryWrapper, StoryTitle,StoryMeta, StoryMetaElement} from '../styles/styleTheStory';
+import { mapTime} from '../mappers/mapTime';
 export const  Story = ({ storyId })  => {
  const [story, setStory] = useState({});
     
@@ -10,16 +11,24 @@ export const  Story = ({ storyId })  => {
 }, []);
   
    return story && story.url ?  (
-      <>
-      
-       <a href = {story.url}>
-           <p>{story.title}</p>
-       </a>
+      <StoryWrapper data-testid="story">
+          <StoryTitle>
+            <a href = {story.url}>
+                {story.title}
+            </a>
+          </StoryTitle>
+          <StoryMeta>
+              <span  data-testid="story-by">
+                  <StoryMetaElement calor="#000">By:</StoryMetaElement> {story.by}
+              </span>
+              <span  data-testid="story-time">
+                  <StoryMetaElement calor="#000">Posted:</StoryMetaElement> {}
+                  {mapTime(story.time)}
+              </span>
+          </StoryMeta>
+    
 
-       By: <p>{story.by}</p>
-       Posted: <p>{story.time}</p>
-
-      </>
+      </StoryWrapper>
        ): null;
 };
 
