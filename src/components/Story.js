@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState, memo} from 'react';
 import { getStory} from '../services/theapi';
 import {StoryWrapper, StoryTitle,StoryMeta, StoryMetaElement} from '../styles/styleTheStory';
 import { mapTime} from '../mappers/mapTime';
